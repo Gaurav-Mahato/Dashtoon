@@ -1,7 +1,6 @@
 import React from "react";
 import {Nav, Navbar, Container, NavDropdown} from "react-bootstrap";
-import "./bootstrap.min.css";
-import {useDispatch, useSelector} from "react-redux";
+// import "./bootstrap.min.css";
 
 
 const Header = () => {

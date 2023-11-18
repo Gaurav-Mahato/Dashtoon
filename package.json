@@ -2,7 +2,6 @@
   "name": "dashtoon",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://xdwvg9no7pefghrn.us-east-1.aws.endpoints.huggingface.cloud",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.7",
     "@testing-library/jest-dom": "^5.17.0",
