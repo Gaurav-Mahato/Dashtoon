@@ -5,6 +5,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import { getImage } from '../actions/imageActions';
 import Loader from './Loader';
 import Message from './Message';
+import { IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } from '../actions/types';
 
 const MangaScreen = () => {
     const [story,setStory] = useState('')
