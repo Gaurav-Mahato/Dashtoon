@@ -2,14 +2,13 @@ import React,{useState,useEffect} from 'react'
 import { Button, Col, Container, Form, Image, Row } from 'react-bootstrap';
 import FormContainer from './FormContainer';
 import {useSelector,useDispatch} from 'react-redux'
-import axios from 'axios'
 import { getImage } from '../actions/imageActions';
 import Loader from './Loader';
 import Message from './Message';
 
 const MangaScreen = () => {
     const [story,setStory] = useState('')
-    const [panelState,setPanelState] = useState(null)
+    // const [panelState,setPanelState] = useState(null)
     const dispatch = useDispatch()
     const {loading,panel,error} = useSelector(state => state.panel)
     useEffect(() => {
@@ -19,14 +18,6 @@ const MangaScreen = () => {
         e.preventDefault()
         dispatch(getImage(story))
     }
-    const convert = async() => {
-        if(panel){
-            const result = await panel.blob()
-            console.log(result)
-            setPanelState(result)
-            return panelState
-        }
-    }
     return <>
         <main className='py-3'></main>
         <Container>
@@ -35,7 +26,7 @@ const MangaScreen = () => {
                     {/* {loading && <Loader></Loader>}
                     {error && <Message variant="danger" message={error}></Message>}    */}
                     {loading ? <Loader></Loader> : error ? <Message variant="danger" message={error}></Message> : panel ? <>
-                        <Image src={convert(panel)}></Image>
+                        <Image src={panel}></Image>
                     </>: <h1>Hello</h1>}
                 </Col> {/* Manga Panel Images */}
                 <Col sm={12} md={12} lg={4} className="display-text">
