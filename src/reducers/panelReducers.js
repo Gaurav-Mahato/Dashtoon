@@ -8,11 +8,11 @@ import { IMAGE_REQUEST_FAILURE, IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } f
   const panelReducer = (state = {panel: ""}, action) => {
     switch (action.type) {
       case IMAGE_REQUEST_PENDING:
-        return { ...state, loading: true };
+        return {  loading: true };
       case IMAGE_REQUEST_SUCCESS:
-        return { ...state, loading: false, panel: true };
+        return { loading: false, panel: action.payload };
       case IMAGE_REQUEST_FAILURE:
-        return { ...state, loading: false, error: action.payload };
+        return { loading: false, error: action.payload };
       default:
         return state;
     }
