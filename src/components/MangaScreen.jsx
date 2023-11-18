@@ -6,6 +6,7 @@ import axios from 'axios'
 import { getImage } from '../actions/imageActions';
 import Loader from './Loader';
 import Message from './Message';
+import { IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } from '../actions/types';
 
 const MangaScreen = () => {
     const [story,setStory] = useState('')
@@ -17,16 +18,43 @@ const MangaScreen = () => {
     },[panel])
     const submitHandler = async (e) => {
         e.preventDefault()
-        dispatch(getImage(story))
-    }
-    const convert = async() => {
-        if(panel){
-            const result = await panel.blob()
-            console.log(result)
-            setPanelState(result)
-            return panelState
+        dispatch({type: IMAGE_REQUEST_PENDING})
+        // dispatch(getImage(story))
+        async function query(data) {
+            const response = await fetch(
+                "https://xdwvg9no7pefghrn.us-east-1.aws.endpoints.huggingface.cloud",
+                {
+                    headers: { 
+                        "Accept": "image/png",
+                        "Authorization": "Bearer VknySbLLTUjbxXAXCjyfaFIPwUTCeRXbFSOjwRiCxsxFyhbnGjSFalPKrpvvDAaPVzWEevPljilLVDBiTzfIbWFdxOkYJxnOPoHhkkVGzAknaOulWggusSFewzpqsNWM", 
+                        "Content-Type": "application/json" 
+                    },
+                    method: "POST",
+                    body: JSON.stringify(data),
+                }
+            );
+            const result = await response.blob();
+            return result;
         }
+        query({"inputs": "Astronaut riding a horse"}).then((response) => {
+            // setPanelState(response)
+            const reader = new FileReader()
+            reader.onload = () => {
+                setPanelState(reader.result)
+            }
+            reader.readAsDataURL(response)
+            console.log(response)
+            dispatch({type: IMAGE_REQUEST_SUCCESS})
+        });
     }
+    // const convert = async() => {
+    //     if(panel){
+    //         const result = await panel.blob()
+    //         console.log(result)
+    //         setPanelState(result)
+    //         return panelState
+    //     }
+    // }
     return <>
         <main className='py-3'></main>
         <Container>
@@ -35,7 +63,7 @@ const MangaScreen = () => {
                     {/* {loading && <Loader></Loader>}
                     {error && <Message variant="danger" message={error}></Message>}    */}
                     {loading ? <Loader></Loader> : error ? <Message variant="danger" message={error}></Message> : panel ? <>
-                        <Image src={convert(panel)}></Image>
+                        <Image src={panelState}></Image>
                     </>: <h1>Hello</h1>}
                 </Col> {/* Manga Panel Images */}
                 <Col sm={12} md={12} lg={4} className="display-text">

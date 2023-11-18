@@ -10,7 +10,7 @@ import { IMAGE_REQUEST_FAILURE, IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } f
       case IMAGE_REQUEST_PENDING:
         return { ...state, loading: true };
       case IMAGE_REQUEST_SUCCESS:
-        return { ...state, loading: false, panel: action.payload };
+        return { ...state, loading: false, panel: true };
       case IMAGE_REQUEST_FAILURE:
         return { ...state, loading: false, error: action.payload };
       default:
