@@ -13,7 +13,7 @@ function App() {
   const {panel} = useSelector(state => state.panel)
   return <>
         <Header />
-        {panel.length < 10 ? <MangaScreen /> : <PublishScreen />}
+        {panel.length < 10 || (panel.length === 10 && panel[panel.length-1].annotation ==='' ) ? <MangaScreen /> : <PublishScreen />}
         {/* <PublishScreen /> */}
     </>
 }
