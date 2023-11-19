@@ -49,8 +49,8 @@ const MangaScreen = () => {
                             <Image src={panel[panel.length-1].link} style={{width: '100%'}}></Image>
                         </>: <h1>Let's visualize</h1>}
                     </Col> {/* Manga Panel Images */}
-                    <Col sm={12} md={12} lg={4} className="display-text" style={{display: 'flex', flexDirection: 'row'}}>
-                        <FormContainer style={{display: 'flex',alignContent: 'space-between', alignItems: 'stretch'}}>
+                    <Col sm={12} md={12} lg={4} className="display-text" style={{}}>
+                        <FormContainer style={{}}>
                             <div className="col-sm-12 col-md-12">
                                 <h1 className="mb-3 mb-lg-5 mb-md-4 mb-sm-3">Enter Your Story</h1>
                                 <div>
