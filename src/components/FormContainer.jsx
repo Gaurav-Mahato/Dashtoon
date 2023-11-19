@@ -3,13 +3,13 @@ import {Row,Col,Container} from "react-bootstrap";
 
 const FormContainer = ({children}) => {
     return(
-        <Container>
-          <Row className="justify-content-md-center">
-              <Col md={6} xs={12}>
+        
+          <Row className="justify-content-md-center col-sm-12 col-md-12">
+              <Col md={12} xs={12} style={{display: 'flex',flexDirection: 'column',justifyContent: 'space-between'}}>
                   {children}
               </Col>
           </Row>
-        </Container>
+        
     )
 }
 
