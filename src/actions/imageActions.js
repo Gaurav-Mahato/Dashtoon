@@ -1,5 +1,9 @@
+import axios from 'axios';
+import { IMAGE_ANNOTATION_EXECUTION, IMAGE_REQUEST_FAILURE, IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } from './types';
 
-import { IMAGE_REQUEST_FAILURE, IMAGE_REQUEST_PENDING, IMAGE_REQUEST_SUCCESS } from './types';
+export const addAnnotation = (annotation) => async(dispatch) => {
+    dispatch({type: IMAGE_ANNOTATION_EXECUTION, payload: annotation})
+}
 
 export const getImage = (story) => async(dispatch) => {
 
@@ -20,7 +24,6 @@ export const getImage = (story) => async(dispatch) => {
         return result;
     }
     dispatch({type: IMAGE_REQUEST_PENDING})
-
     const input = {
         "inputs": story
     }
@@ -34,7 +37,10 @@ export const getImage = (story) => async(dispatch) => {
 
     query(input).then((response) => {
         const reader = new FileReader()
-        reader.onload = () => dispatch({type: IMAGE_REQUEST_SUCCESS, payload: reader.result})
+        reader.onload = () => dispatch({type: IMAGE_REQUEST_SUCCESS, payload: {
+          link: reader.result,
+          annotation: ''
+        })
         reader.readAsDataURL(response)
         // console.log(reader)
         // console.log(reader)
